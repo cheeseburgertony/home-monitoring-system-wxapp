@@ -25,5 +25,12 @@
     </view>
   </view>
 
-  
+  <!-- MQTT UI部分 -->
+  <view class="mqtt">
+    <view class="box">
+      <text>MQTT服务器</text>
+      <text wx:if="{{ !state }}" class="state">未连接</text>
+      <text wx:else class="state success">已连接</text>
+    </view>
+  </view>
 </view>

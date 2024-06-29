@@ -1,0 +1,29 @@
+<view class="contain">
+  <!-- 头部部分 -->
+  <!-- <view class="header">
+    <image src="/images/head.jpg" mode="" />
+    <view class="text">{{ title }}</view>
+  </view> -->
+  <!-- 天气UI部分 -->
+  <view class="weather">
+    <view class="title">
+      <text>{{ weather }}</text>
+    </view>
+    <view class="content">
+      <view class="left">
+        <image src="/images/weather/bingbao.png" mode="scaleToFill" />
+      </view>
+      <view class="right">
+        <view class="local">
+          <image src="/images/map.png" mode="widthFix" />
+          <text>{{ location }}</text>
+        </view>
+        <view class="temperature">
+          <text>{{ temperature }}℃</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  
+</view>

@@ -1,3 +1,4 @@
+import Toast from '@vant/weapp/toast/toast'
 const KEY = '141214f6fdecbc49abd6300a16439726'
 Page({
   // 高得API的KEY
@@ -12,6 +13,8 @@ Page({
     weatherText: '晴',
     weatherImgUrl: '/images/weather/bingbao.png',
     isConnect: false,
+    isSubscribe: false,  // 是否订阅
+    isPublish: false,    // 是否发布
     mqttActionSheet: false,  // 显示底部弹框
     address: 'embedded.stm.top',
     port: '8888',
@@ -97,16 +100,46 @@ Page({
       weatherImgUrl: `/images/weather/${weather}.png`
     })
   },
+
   // 点击连接按钮
   connectHandle() {
     this.setData({
       isConnect: true
     })
+    Toast.success('连接成功')
   },
   // 断开连接
   disConnectHandle() {
     this.setData({
       isConnect: false
+    })
+    Toast.success('断开成功')
+  },
+
+  // 订阅相关操作
+  subscribeHandle() {
+    if (!this.data.isConnect) return Toast.fail('请先连接')
+    this.setData({
+      isSubscribe: true
+    })
+    Toast.success('订阅成功')
+  },
+  disSubscribeHandle() {
+    this.setData({
+      isSubscribe: false
+    })
+  },
+  // 发布相关操作
+  publishHandle() {
+    if (!this.data.isConnect) return Toast.fail('请先连接')
+    this.setData({
+      isPublish: true
+    })
+    Toast.success('发布成功')
+  },
+  disPublishHandle() {
+    this.setData({
+      isPublish: false
     })
   },
 

@@ -39,6 +39,7 @@
   </view>
   <!-- 底部弹窗 -->
   <van-action-sheet title="MQTT服务器" show="{{ mqttActionSheet }}" bind:close="onClose">
+    <van-toast id="van-toast" />
     <!-- 连接 -->
     <view class="action-sheet">
       <van-cell-group>
@@ -52,15 +53,15 @@
         </view>
       </van-cell-group>
       <!-- 订阅 -->
-      <view class=" subscribe">
+      <view class="subscribe">
         <van-cell-group>
           <view class="text">
             订阅Topic
           </view>
           <van-field model:value="{{ subscribeAddr }}" placeholder="请输入订阅地址" />
           <view class="btn-style">
-            <van-button size="small" custom-class="connect" color="#96b9ff">订阅</van-button>
-            <van-button size="small" custom-class="disconnect" color="#d9d9d9">取消</van-button>
+            <van-button size="small" custom-class="connect" color="{{ !isSubscribe ? '#96b9ff' : '#d9d9d9' }}" disabled="{{ isSubscribe }}" bind:click="subscribeHandle">订阅</van-button>
+            <van-button size="small" custom-class="disconnect" color="{{ isSubscribe ? '#96b9ff' : '#d9d9d9' }}" disabled="{{ !isSubscribe }}" bind:click="disSubscribeHandle">取消</van-button>
           </view>
         </van-cell-group>
       </view>
@@ -72,23 +73,25 @@
           </view>
           <van-field model:value="{{ publishAddr }}" placeholder="请输入发布地址" />
           <view class="btn-style">
-            <van-button size="small" custom-class="connect" color="#96b9ff">发布</van-button>
-            <van-button size="small" custom-class="disconnect" color="#d9d9d9">取消</van-button>
+            <van-button size="small" custom-class="connect" color="{{ !isPublish ? '#96b9ff' : '#d9d9d9' }}" disabled="{{ isPublish }}" bind:click="publishHandle">发布</van-button>
+            <van-button size="small" custom-class="disconnect" color="{{ isPublish ? '#96b9ff' : '#d9d9d9' }}" disabled="{{ !isPublish }}" bind:click="disPublishHandle">修改</van-button>
           </view>
         </van-cell-group>
       </view>
     </view>
   </van-action-sheet>
 
-  <!-- 传感器设备 -->
-  <view class="sensor">
-    <view class="title">传感器设备</view>
-    <my-sensor sensorList="{{ sensorList }}"></my-sensor>
-  </view>
+  <view wx:if="{{ isConnect }}">
+    <!-- 传感器设备 -->
+    <view class="sensor">
+      <view class="title">传感器设备</view>
+      <my-sensor sensorList="{{ sensorList }}"></my-sensor>
+    </view>
 
-  <!-- 其他设备 -->
-  <view class="device">
-    <view class="title">其他设备</view>
-    <my-device bind:onSwitch="onSwitch" otherSensorList="{{ otherSensorList }}"></my-device>
+    <!-- 其他设备 -->
+    <view class="device">
+      <view class="title">其他设备</view>
+      <my-device bind:onSwitch="onSwitch" otherSensorList="{{ otherSensorList }}"></my-device>
+    </view>
   </view>
 </view>

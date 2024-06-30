@@ -1,4 +1,4 @@
-<view class="contain">
+<view>
   <!-- 头部部分 -->
   <!-- <view class="header">
     <image src="/images/head.jpg" mode="" />
@@ -26,11 +26,57 @@
   </view>
 
   <!-- MQTT UI部分 -->
-  <view class="mqtt">
-    <view class="box">
+  <view class="mqtt" bind:tap="mqttConnectHandle">
+    <view class="left">
+      <van-icon name="{{ mqttActionSheet ? 'arrow-down' : 'arrow-up' }}" style="margin-right: 10rpx;" />
       <text>MQTT服务器</text>
-      <text wx:if="{{ !state }}" class="state">未连接</text>
-      <text wx:else class="state success">已连接</text>
+    </view>
+    <view class="right">
+      <view class="state" style="color: {{ isConnect ? '#00b26a' : 'red' }};">
+        {{ isConnect ? '已连接' : '未连接' }}
+      </view>
     </view>
   </view>
+  <!-- 底部弹窗 -->
+  <van-action-sheet title="MQTT服务器" show="{{ mqttActionSheet }}" bind:close="onClose">
+    <!-- 连接 -->
+    <view class="action-sheet">
+      <van-cell-group>
+        <van-field model:value="{{ address }}" required clearable label="Address" placeholder="请输入地址" />
+        <van-field model:value="{{ port }}" required clearable label="Port" placeholder="请输入端口号" />
+        <van-field model:value="{{ username }}" required clearable label="Username" placeholder="请输入用户名" />
+        <van-field model:value="{{ password }}" type="password" label="Password" placeholder="请输入密码" required />
+        <view class="btn-style">
+          <van-button size="small" round custom-class="connect" color="#96b9ff">连接</van-button>
+          <van-button size="small" round custom-class="disconnect" color="#d9d9d9">断开</van-button>
+        </view>
+      </van-cell-group>
+      <!-- 订阅 -->
+      <view class="subscribe">
+        <van-cell-group>
+          <view class="text">
+            订阅Topic
+          </view>
+          <van-field model:value="{{ subscribeAddr }}" placeholder="请输入订阅地址" />
+          <view class="btn-style">
+            <van-button size="small" round custom-class="connect" color="#96b9ff">订阅</van-button>
+            <van-button size="small" round custom-class="disconnect" color="#d9d9d9">取消</van-button>
+          </view>
+        </van-cell-group>
+      </view>
+      <!-- 发布 -->
+      <view class="publish">
+        <van-cell-group>
+          <view class="text">
+            发布Topic
+          </view>
+          <van-field model:value="{{ publishAddr }}" placeholder="请输入发布地址" />
+          <view class="btn-style">
+            <van-button size="small" round custom-class="connect" color="#96b9ff">发布</van-button>
+            <van-button size="small" round custom-class="disconnect" color="#d9d9d9">取消</van-button>
+          </view>
+        </van-cell-group>
+      </view>
+    </view>
+  </van-action-sheet>
 </view>

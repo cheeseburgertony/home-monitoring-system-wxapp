@@ -7,8 +7,13 @@
     "navigationBarTitleText": "智能居家监控系统",
     "navigationBarBackgroundColor": "#ffffff"
   },
-  "style": "v2",
   "componentFramework": "glass-easel",
   "sitemapLocation": "sitemap.json",
-  "lazyCodeLoading": "requiredComponents"
+  "lazyCodeLoading": "requiredComponents",
+  "usingComponents": {
+    "van-icon": "@vant/weapp/icon/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-button": "@vant/weapp/button/index"
+  }
 }

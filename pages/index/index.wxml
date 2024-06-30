@@ -47,12 +47,12 @@
         <van-field model:value="{{ username }}" required clearable label="Username" placeholder="请输入用户名" />
         <van-field model:value="{{ password }}" type="password" label="Password" placeholder="请输入密码" required />
         <view class="btn-style">
-          <van-button size="small" custom-class="connect" color="#96b9ff">连接</van-button>
-          <van-button size="small" custom-class="disconnect" color="#d9d9d9">断开</van-button>
+          <van-button size="small" custom-class="connect" color="{{ !isConnect ? '#96b9ff' : '#d9d9d9' }}" disabled="{{ isConnect }}" bind:click="connectHandle">连接</van-button>
+          <van-button size="small" custom-class="disconnect" color="{{ isConnect ? '#96b9ff' : '#d9d9d9' }}" disabled="{{ !isConnect }}" bind:click="disConnectHandle">断开</van-button>
         </view>
       </van-cell-group>
       <!-- 订阅 -->
-      <view class="subscribe">
+      <view class=" subscribe">
         <van-cell-group>
           <view class="text">
             订阅Topic
@@ -84,5 +84,11 @@
   <view class="sensor">
     <view class="title">传感器设备</view>
     <my-sensor sensorList="{{ sensorList }}"></my-sensor>
+  </view>
+
+  <!-- 其他设备 -->
+  <view class="device">
+    <view class="title">其他设备</view>
+    <my-device bind:onSwitch="onSwitch" otherSensorList="{{ otherSensorList }}"></my-device>
   </view>
 </view>

@@ -106,7 +106,8 @@ page {
 
 /* 传感器设备 */
 
-.sensor .title {
+.sensor .title,
+.device .title {
   margin: 20rpx 0 20rpx 30rpx;
   font-size: 40rpx;
   font-weight: 700;

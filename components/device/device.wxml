@@ -1,0 +1,19 @@
+<view class="device">
+  <view class="device-item" wx:for="{{ otherSensorList }}" wx:key="index">
+    <view class="top">
+      <!-- 图片和名字 -->
+      <view class="left">
+        <image style="width: 80rpx;" src="{{ item.img }}" mode="widthFix" />
+        <view class="name">{{ item.name }}</view>
+      </view>
+      <!-- 开关 -->
+      <view class="right">
+        <van-switch active-color="#89ddff" data-index="{{ index }}" checked="{{ item.isOpen }}" bind:change="onChange" />
+      </view>
+    </view>
+    <!-- 进度条 -->
+    <view wx:if="{{ item.schedule >= 0 }}" class="progress">
+      <van-progress pivot-text="{{ item.schedule }}%" color="#00b050" percentage="{{ item.schedule }}" />
+    </view>
+  </view>
+</view>

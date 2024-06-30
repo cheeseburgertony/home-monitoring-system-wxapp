@@ -1,0 +1,38 @@
+/* components/device/device.wxss */
+.device {
+  margin: 26rpx;
+  /* height: 600rpx; */
+  /* background: pink; */
+}
+
+.device-item {
+  padding: 26rpx 30rpx;
+  margin-bottom: 30rpx;
+  width: 100%;
+  box-sizing: border-box;
+  /* height: 100rpx; */
+  background-color: #fff;
+  border-radius: 32rpx;
+  box-shadow: 4rpx 4rpx 16rpx rgba(0, 0, 0, 0.4);
+}
+
+.device-item .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.device-item .left {
+  display: flex;
+  align-items: center;
+}
+
+.device-item .name {
+  margin-left: 24rpx;
+  font-size: 40rpx;
+  align-content: center;
+}
+
+.device-item .progress{
+  margin: 26rpx 0 6rpx 0;
+}

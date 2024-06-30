@@ -13,12 +13,12 @@ Page({
     weatherImgUrl: '/images/weather/bingbao.png',
     isConnect: false,
     mqttActionSheet: false,  // 显示底部弹框
-    address: '',
-    port: '',
-    username: '',
-    password: '',
-    subscribeAddr: '',
-    publishAddr: '',
+    address: 'embedded.stm.top',
+    port: '8888',
+    username: 'admin',
+    password: '123456',
+    subscribeAddr: 'test',
+    publishAddr: 'test',
     sensorList: [
       //传感器列表
       //图 名字 参数 值 单位 序号
@@ -56,7 +56,27 @@ Page({
         idx: 3,
       },
     ],
+    // 其他设备列表
+    otherSensorList: [
+      { img: "/images/deng.png", name: "灯", isOpen: true },
+      { img: "/images/fengshan.png", name: "风扇", isOpen: false },
+      {
+        img: "/images/chuanglian.png",
+        name: "窗帘",
+        schedule: 50, // 进度条
+        isOpen: false,
+      },
+    ],
   },
+
+  // 更改开关状态
+  onSwitch(e) {
+    console.log(e.detail);
+    this.setData({
+      [`otherSensorList[${e.detail}].isOpen`]: !this.data.otherSensorList[e.detail].isOpen
+    })
+  },
+
   // 更具天气显示相对于的天气图片
   getWeatherImg() {
     let weather = ''
@@ -75,6 +95,18 @@ Page({
     }
     this.setData({
       weatherImgUrl: `/images/weather/${weather}.png`
+    })
+  },
+  // 点击连接按钮
+  connectHandle() {
+    this.setData({
+      isConnect: true
+    })
+  },
+  // 断开连接
+  disConnectHandle() {
+    this.setData({
+      isConnect: false
     })
   },
 

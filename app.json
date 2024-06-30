@@ -1,11 +1,32 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/record/record"
   ],
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "智能居家监控系统",
     "navigationBarBackgroundColor": "#ffffff"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#000000",
+    "selectedColor": "#17a4d4",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "/images/home.png",
+        "selectedIconPath": "/images/home-active.png"
+      },
+      {
+        "pagePath": "pages/record/record",
+        "text": "记录",
+        "iconPath": "/images/record.png",
+        "selectedIconPath": "/images/record-active.png"
+      }
+    ]
   },
   "componentFramework": "glass-easel",
   "sitemapLocation": "sitemap.json",
@@ -20,7 +41,9 @@
     "van-switch": "@vant/weapp/switch/index",
     "van-progress": "@vant/weapp/progress/index",
     "van-toast": "@vant/weapp/toast/index",
-    "van-dialog": "@vant/weapp/dialog/index"
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-tabbar": "@vant/weapp/tabbar/index",
+    "van-tabbar-item": "@vant/weapp/tabbar-item/index"
   },
   "requiredPrivateInfos": [
     "getLocation"

@@ -1,0 +1,4 @@
+/* custom-tab-bar/index.wxss */
+.van-tabbar-item{
+  margin-top: 26rpx;
+}

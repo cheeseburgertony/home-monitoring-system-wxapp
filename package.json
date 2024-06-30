@@ -1,5 +1,7 @@
 {
   "dependencies": {
-    "@vant/weapp": "^1.11.6"
+    "@vant/weapp": "^1.11.6",
+    "mobx-miniprogram": "^6.12.3",
+    "mobx-miniprogram-bindings": "^3.0.0"
   }
 }

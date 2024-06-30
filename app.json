@@ -15,5 +15,13 @@
     "van-action-sheet": "@vant/weapp/action-sheet/index",
     "van-field": "@vant/weapp/field/index",
     "van-button": "@vant/weapp/button/index"
+  },
+  "requiredPrivateInfos": [
+    "getLocation"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
   }
 }

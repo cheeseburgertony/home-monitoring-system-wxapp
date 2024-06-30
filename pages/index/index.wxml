@@ -7,11 +7,11 @@
   <!-- 天气UI部分 -->
   <view class="weather">
     <view class="title">
-      <text>{{ weather }}</text>
+      <text>{{ welcome }}</text>
     </view>
     <view class="content">
       <view class="left">
-        <image src="/images/weather/bingbao.png" mode="scaleToFill" />
+        <image src="{{ weatherImgUrl }}" mode="scaleToFill" />
       </view>
       <view class="right">
         <view class="local">

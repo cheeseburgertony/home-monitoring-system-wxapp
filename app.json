@@ -19,7 +19,8 @@
     "van-button": "@vant/weapp/button/index",
     "van-switch": "@vant/weapp/switch/index",
     "van-progress": "@vant/weapp/progress/index",
-    "van-toast": "@vant/weapp/toast/index"
+    "van-toast": "@vant/weapp/toast/index",
+    "van-dialog": "@vant/weapp/dialog/index"
   },
   "requiredPrivateInfos": [
     "getLocation"

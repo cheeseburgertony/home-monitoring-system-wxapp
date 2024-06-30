@@ -20,9 +20,22 @@
   box-shadow: 4rpx 4rpx 16rpx rgba(0, 0, 0, 0.4);
 }
 
+.sensor-item .left {
+  width: 120rpx;
+  height: 100rpx;
+}
+
+.sensor-item:nth-child(1) .left {
+  padding: 30rpx;
+}
+
+.sensor-item:nth-child(2) .left {
+  padding: 20rpx;
+}
+
 .sensor-item .img {
-  width: 100rpx;
-  height: 80rpx;
+  /* width: 100rpx; */
+  height: 100rpx;
   margin-right: 40rpx;
 }
 

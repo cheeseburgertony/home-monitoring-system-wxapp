@@ -1,5 +1,5 @@
 <view class="sensor">
-  <view class="sensor-item" wx:for="{{ sensorList }}" wx:key="idx">
+  <view class="sensor-item" wx:for="{{ sensorList }}" wx:key="idx" bind:tap="changeHandle" data-index="{{index}}">
     <view class="left">
       <image class="img" src="{{ item.img }}" mode="heightFix" />
     </view>
@@ -8,5 +8,13 @@
       <view class="box">{{ item.value }}{{ item.unit }}</view>
       <view class="box" style="margin-bottom: 0;">{{ item.name }}</view>
     </view>
+    <view wx:if="{{ item.value >= item.top || item.value <= item.bottom ? true : false }}" style="font-size: 50rpx;">❗</view>
   </view>
 </view>
+<!-- 弹框 -->
+<van-dialog use-slot title="设置{{ name }}阈值" show="{{ showDialog }}" show-cancel-button bind:confirm="confirmHandle" bind:cancel="onCancel">
+  <van-cell-group>
+    <van-field model:value="{{ topValue }}" clearable label="上限" placeholder="请输入上限" />
+    <van-field model:value="{{ bottomValue }}" clearable label="下限" placeholder="请输入下限" border="{{ false }}" />
+  </van-cell-group>
+</van-dialog>

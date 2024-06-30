@@ -12,7 +12,7 @@ Page({
     temperature: 30,
     weatherText: '晴',
     weatherImgUrl: '/images/weather/bingbao.png',
-    isConnect: false,
+    isConnect: true,
     isSubscribe: false,  // 是否订阅
     isPublish: false,    // 是否发布
     mqttActionSheet: false,  // 显示底部弹框
@@ -29,7 +29,7 @@ Page({
         img: "/images/P1.png",
         name: "DHT22",
         parameter: "温度",
-        value: 0,
+        value: 30,
         unit: "°C",
         idx: 0,
       },
@@ -37,7 +37,7 @@ Page({
         img: "/images/P2.png",
         name: "DHT22",
         parameter: "湿度",
-        value: 0,
+        value: 50,
         unit: "%rh",
         // isPass: true,
         idx: 1,
@@ -46,7 +46,7 @@ Page({
         img: "/images/P3.png",
         name: "TEMT60",
         parameter: "光强",
-        value: 0,
+        value: 1000,
         unit: "lx",
         idx: 2,
       },
@@ -54,7 +54,7 @@ Page({
         img: "/images/P4.png",
         name: "MQ2",
         parameter: "烟雾",
-        value: 0,
+        value: 20,
         unit: "ppm",
         idx: 3,
       },
@@ -70,6 +70,15 @@ Page({
         isOpen: false,
       },
     ],
+  },
+
+  // 修改传感器上下限
+  limitHandle({detail}){
+    console.log(detail);
+    this.setData({
+      [`sensorList[${detail.index}].top`]: detail.top,
+      [`sensorList[${detail.index}].bottom`]: detail.bottom
+    })
   },
 
   // 更改开关状态

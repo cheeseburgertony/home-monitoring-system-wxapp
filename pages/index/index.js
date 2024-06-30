@@ -18,7 +18,44 @@ Page({
     username: '',
     password: '',
     subscribeAddr: '',
-    publishAddr: ''
+    publishAddr: '',
+    sensorList: [
+      //传感器列表
+      //图 名字 参数 值 单位 序号
+      {
+        img: "/images/P1.png",
+        name: "DHT22",
+        parameter: "温度",
+        value: 0,
+        unit: "°C",
+        idx: 0,
+      },
+      {
+        img: "/images/P2.png",
+        name: "DHT22",
+        parameter: "湿度",
+        value: 0,
+        unit: "%rh",
+        // isPass: true,
+        idx: 1,
+      },
+      {
+        img: "/images/P3.png",
+        name: "TEMT60",
+        parameter: "光强",
+        value: 0,
+        unit: "lx",
+        idx: 2,
+      },
+      {
+        img: "/images/P4.png",
+        name: "MQ2",
+        parameter: "烟雾",
+        value: 0,
+        unit: "ppm",
+        idx: 3,
+      },
+    ],
   },
   // 更具天气显示相对于的天气图片
   getWeatherImg() {

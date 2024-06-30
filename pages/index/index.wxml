@@ -79,4 +79,10 @@
       </view>
     </view>
   </van-action-sheet>
+
+  <!-- 传感器设备 -->
+  <view class="sensor">
+    <view class="title">传感器设备</view>
+    <my-sensor sensorList="{{ sensorList }}"></my-sensor>
+  </view>
 </view>

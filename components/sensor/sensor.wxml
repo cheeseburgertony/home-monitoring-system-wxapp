@@ -1,0 +1,12 @@
+<view class="sensor">
+  <view class="sensor-item" wx:for="{{ sensorList }}" wx:key="idx">
+    <view class="left">
+      <image class="img" src="{{ item.img }}" mode="heightFix" />
+    </view>
+    <view class="right">
+      <view class="box">{{ item.parameter }}</view>
+      <view class="box">{{ item.value }}{{ item.unit }}</view>
+      <view class="box" style="margin-bottom: 0;">{{ item.name }}</view>
+    </view>
+  </view>
+</view>

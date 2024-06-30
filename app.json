@@ -11,6 +11,7 @@
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents",
   "usingComponents": {
+    "my-sensor": "/components/sensor/sensor",
     "van-icon": "@vant/weapp/icon/index",
     "van-action-sheet": "@vant/weapp/action-sheet/index",
     "van-field": "@vant/weapp/field/index",

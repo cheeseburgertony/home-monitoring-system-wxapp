@@ -1,1 +1,14 @@
-/* pages/record/record.wxss */
+ec-canvas {
+  position: absolute;
+  top: 200rpx;
+  bottom: 130rpx;
+  left: 0;
+  right: 0;
+}
+
+.date-style{
+  margin-top: 60rpx;
+  text-align: center;
+  font-size: 40rpx;
+  font-weight: 600;
+}

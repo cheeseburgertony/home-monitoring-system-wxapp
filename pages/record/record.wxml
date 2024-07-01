@@ -1,2 +1,18 @@
-<!--pages/record/record.wxml-->
-<text>pages/record/record.wxml</text>
+<!--index.wxml-->
+<view>
+  <van-dropdown-menu>
+    <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}" />
+    <van-dropdown-item id="item" title="{{ itemTitle }}">
+      <van-datetime-picker show-toolbar="{{false }}" type="date" value="{{ currentDate }}" bind:input="onInput" min-date="{{ minDate }}" formatter="{{ formatter }}" max-date="{{ maxDate }}" />
+    </van-dropdown-item>
+  </van-dropdown-menu>
+</view>
+
+<view class="date-style">
+  {{ dateString }} 当天数据
+</view>
+<view>
+  <view class="container">
+    <ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ ec }}"></ec-canvas>
+  </view>
+</view>

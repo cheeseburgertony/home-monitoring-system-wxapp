@@ -12,7 +12,7 @@ Page({
     temperature: 30,
     weatherText: '晴',
     weatherImgUrl: '/images/weather/bingbao.png',
-    isConnect: true,
+    isConnect: false,
     isSubscribe: false,  // 是否订阅
     isPublish: false,    // 是否发布
     mqttActionSheet: false,  // 显示底部弹框
@@ -73,7 +73,7 @@ Page({
   },
 
   // 修改传感器上下限
-  limitHandle({detail}){
+  limitHandle({ detail }) {
     console.log(detail);
     this.setData({
       [`sensorList[${detail.index}].top`]: detail.top,
@@ -96,13 +96,13 @@ Page({
       weather = 'qing'
     } else if (this.data.weatherText.includes('冰雹')) {
       weather = 'bingbao'
-    } else if (this.data.weatherText.includes('云')) {
+    } else if (this.data.weatherText.includes('云') || this.data.weatherText === '阴') {
       weather = 'duoyun'
     } else if (this.data.weatherText.includes('雷')) {
       weather = 'lei'
     } else if (this.data.weatherText.includes('雪')) {
       weather = 'xue'
-    } else if (this.data.weatherText.includes('雨') || this.data.weatherText === '阴') {
+    } else if (this.data.weatherText.includes('雨')) {
       weather = 'yu'
     }
     this.setData({

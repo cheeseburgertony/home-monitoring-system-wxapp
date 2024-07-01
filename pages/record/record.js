@@ -2,71 +2,43 @@ import * as echarts from '../../ec-canvas/echarts';
 
 const app = getApp();
 
-function initChart(canvas, width, height, dpr) {
-  const chart = echarts.init(canvas, null, {
-    width: width,
-    height: height,
-    devicePixelRatio: dpr // new
-  });
-  canvas.setChart(chart);
+// 取N到M之间的随机数
+const getRandom = (N, M) => Math.random() * (M - N + 1) + N;
 
-  // var option = {
-  //   title: {
-  //     text: '测试下面legend的红色区域不应被裁剪',
-  //     left: 'center'
-  //   },
-  //   legend: {
-  //     data: ['A', 'B', 'C'],
-  //     top: 50,
-  //     left: 'center',
-  //     backgroundColor: 'red',
-  //     z: 100
-  //   },
-  //   grid: {
-  //     containLabel: true
-  //   },
-  //   tooltip: {
-  //     show: true,
-  //     trigger: 'axis'
-  //   },
-  //   xAxis: {
-  //     type: 'category',
-  //     boundaryGap: false,
-  //     data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-  //     // show: false
-  //   },
-  //   yAxis: {
-  //     x: 'center',
-  //     type: 'value',
-  //     splitLine: {
-  //       lineStyle: {
-  //         type: 'dashed'
-  //       }
-  //     }
-  //     // show: false
-  //   },
-  //   series: [{
-  //     name: 'A',
-  //     type: 'line',
-  //     smooth: true,
-  //     data: [18, 36, 65, 30, 78, 40, 33]
-  //   }, {
-  //     name: 'B',
-  //     type: 'line',
-  //     smooth: true,
-  //     data: [12, 50, 51, 35, 70, 30, 20]
-  //   }, {
-  //     name: 'C',
-  //     type: 'line',
-  //     smooth: true,
-  //     data: [10, 30, 31, 50, 40, 20, 10]
-  //   }]
-  // };
 
-  var option = {
+// 模拟天温度
+const getDayTemp = () => {
+  const dayTemp = []
+  for (let i = 0; i < 7; i++) {
+    dayTemp[i] = getRandom(24, 36).toFixed(1)
+  }
+  return dayTemp
+}
+// 模拟天湿度
+const getDayHumidity = () => {
+  const dayHumidity = []
+  for (let i = 0; i < 7; i++) {
+    dayHumidity[i] = parseInt(getRandom(10, 100))
+  }
+  return dayHumidity
+}
+// 模拟天亮度
+const getDayBrightness = () => {
+  const dayBrightness = []
+  for (let i = 0; i < 7; i++) {
+    dayBrightness[i] = parseInt(getRandom(100, 1000))
+  }
+  return dayBrightness
+}
+
+// 图表配置
+let option
+function setOption(chart, index) {
+  // 根据传入的传感器索引显示不同的数据
+  const arr = [getDayTemp(), getDayHumidity(), getDayBrightness()]
+  option = {
     xAxis: {
       type: 'category',
-      // data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
       data: ['07:50', '09:30', '10:20', '12:50', '15:25', '18:10', '20:25']
     },
     yAxis: {
@@ -74,37 +46,34 @@ function initChart(canvas, width, height, dpr) {
     },
     series: [
       {
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
+        data: arr[index],
         type: 'line',
-        // smooth: true
+        smooth: true
       }
     ]
   };
-
-  chart.setOption(option);
-  return chart;
+  chart.setOption(option, 0);
 }
 
 Page({
-  onShareAppMessage: function (res) {
-    return {
-      title: 'ECharts 可以在微信小程序中使用啦！',
-      path: '/pages/index/index',
-      success: function () { },
-      fail: function () { }
-    }
-  },
   data: {
+    // echatrs相关配置
     ec: {
-      onInit: initChart
+      // 将 lazyLoad 设为 true 后，需要手动初始化图表
+      lazyLoad: true
     },
+    isLoaded: false,
+
+    flag: 0,
+
+    // 下拉菜单配置
     itemTitle: '日期',
-    option1: [
+    option: [
       { text: '温度', value: 0 },
       { text: '湿度', value: 1 },
       { text: '亮度', value: 2 },
     ],
-    value1: 0,
+    value: 0,
 
     dateString: new Date(2022, 5, 6).toLocaleDateString(),
     currentDate: new Date(2022, 5, 6).getTime(),
@@ -121,16 +90,55 @@ Page({
     },
   },
 
+  // 选择传感器发送变化，切换数据
+  onChange(e) {
+    this.setData({
+      value: e.detail
+    })
+    // 调入初始化数据并且传入要显示的传感器的序号
+    this.init && this.init(e.detail)
+  },
+
   // 当前日期变化触发
   onInput(event) {
     this.setData({
       currentDate: event.detail,
       dateString: new Date(event.detail).toLocaleDateString()
     });
+    if (this.data.flag >= 2) {
+      this.init(this.data.value)
+    }
+    // 防止首次加载时报错
+    if (this.data.flag < 2) {
+      this.setData({ flag: this.data.flag + 1 })
+    }
   },
 
-  onReady() {
-    console.log(this.data.dateString);
+  // 进入时获取图表
+  onReady: function () {
+    // 获取组件
+    this.ecComponent = this.selectComponent('#mychart-dom-bar');
+    this.init()
   },
 
+  //进入页面后初始化图表
+  init: function (i = 0) {
+    this.ecComponent.init((canvas, width, height, dpr) => {
+      // 获取组件的 canvas、width、height 后的回调函数
+      // 在这里初始化图表
+      const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height,
+        devicePixelRatio: dpr // new
+      });
+      setOption(chart, i);
+      // 将图表实例绑定到 this 上，可以在其他成员函数（如 dispose）中访问
+      this.chart = chart;
+      this.setData({
+        isLoaded: true,
+      });
+      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+      return chart;
+    });
+  },
 });

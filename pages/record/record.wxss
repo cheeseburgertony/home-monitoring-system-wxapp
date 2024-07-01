@@ -1,4 +1,6 @@
 ec-canvas {
+  width: 100%;
+  height: 80%;
   position: absolute;
   top: 200rpx;
   bottom: 130rpx;

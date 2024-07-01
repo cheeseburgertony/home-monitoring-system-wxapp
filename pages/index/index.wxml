@@ -41,7 +41,7 @@
   <van-action-sheet title="MQTT服务器" show="{{ mqttActionSheet }}" bind:close="onClose">
     <van-toast id="van-toast" />
     <!-- 连接 -->
-    <view class="action-sheet">
+    <view style="height: 1040rpx;" class="action-sheet">
       <van-cell-group>
         <van-field model:value="{{ address }}" required clearable label="Address" placeholder="请输入地址" />
         <van-field model:value="{{ port }}" required clearable label="Port" placeholder="请输入端口号" />
